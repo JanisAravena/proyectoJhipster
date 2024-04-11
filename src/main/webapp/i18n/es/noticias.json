@@ -1,0 +1,27 @@
+{
+  "proyectoJhipsterApp": {
+    "noticias": {
+      "home": {
+        "title": "Noticias",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Noticias",
+        "createOrEditLabel": "Crear o editar Noticias",
+        "notFound": "Ningún Noticias encontrado"
+      },
+      "created": "Un nuevo Noticias ha sido creado con el identificador {{ param }}",
+      "updated": "Un Noticias ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Noticias ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Noticias {{ id }}?"
+      },
+      "detail": {
+        "title": "Noticias"
+      },
+      "id": "ID",
+      "titulo": "Titulo",
+      "contenido": "Contenido",
+      "fechaPublicacion": "Fecha Publicacion",
+      "autor": "Autor"
+    }
+  }
+}

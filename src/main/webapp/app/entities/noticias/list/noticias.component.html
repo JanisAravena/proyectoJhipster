@@ -1,0 +1,110 @@
+<div>
+  <h2 id="page-heading" data-cy="NoticiasHeading">
+    <span jhiTranslate="proyectoJhipsterApp.noticias.home.title">Noticias</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="proyectoJhipsterApp.noticias.home.refreshListLabel">Refrescar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-noticias"
+        [routerLink]="['/noticias/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="proyectoJhipsterApp.noticias.home.createLabel">Crear nuevo Noticias</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (noticias?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="proyectoJhipsterApp.noticias.home.notFound">Ningún Noticias encontrado</span>
+    </div>
+  }
+
+  @if (noticias && noticias.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="titulo">
+              <div class="d-flex">
+                <span jhiTranslate="proyectoJhipsterApp.noticias.titulo">Titulo</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="contenido">
+              <div class="d-flex">
+                <span jhiTranslate="proyectoJhipsterApp.noticias.contenido">Contenido</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fechaPublicacion">
+              <div class="d-flex">
+                <span jhiTranslate="proyectoJhipsterApp.noticias.fechaPublicacion">Fecha Publicacion</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="autor">
+              <div class="d-flex">
+                <span jhiTranslate="proyectoJhipsterApp.noticias.autor">Autor</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (noticias of noticias; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/noticias', noticias.id, 'view']">{{ noticias.id }}</a>
+              </td>
+              <td>{{ noticias.titulo }}</td>
+              <td>{{ noticias.contenido }}</td>
+              <td>{{ noticias.fechaPublicacion | formatMediumDate }}</td>
+              <td>{{ noticias.autor }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/noticias', noticias.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Vista</span>
+                  </a>
+
+                  <a [routerLink]="['/noticias', noticias.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(noticias)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Eliminar</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>
